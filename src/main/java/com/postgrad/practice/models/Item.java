@@ -1,47 +1,69 @@
 package com.postgrad.practice.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "items")
 public class Item {
 
-    private final int itemId;
-    private final String name;
-    private final String description;
-    private final int luckyPoints;
-    private final Map<String, Integer> allItems;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    @Column(nullable = false, unique = true)
+    private String item;
 
-    public Item(int itemId, String name, String description, int luckyPoints, Map<String, Integer> allItems) {
-        this.itemId = itemId;
-        this.name = name;
+    @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
+    private long damage;
+
+    public Item() {}
+
+    public Item(long id, String item, String description, long damage) {
+        this.id = id;
+        this.item = item;
         this.description = description;
-        this.luckyPoints = luckyPoints;
-        if (allItems != null) {
-            this.allItems = new HashMap<>(allItems);
-        } else {
-            this.allItems = new HashMap<>();
-
-        }
+        this.damage = damage;
     }
 
-    public int getItemId() {
-        return itemId;
+    public Item(Item copy) {
+        this.id = copy.id;
+        this.item = copy.item;
+        this.description = copy.description;
+        this.damage = copy.damage;
     }
 
-    public String getName() {
-        return name;
+    public long getId() {
+        return id;
+    }
+
+    public String getItem() {
+        return item;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public int getLuckyPoints() {
-        return luckyPoints;
+    public long getDamage() {
+        return damage;
     }
 
-    public Map<String, Integer> getAllItems() {
-        return allItems;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDamage(long damage) {
+        this.damage = damage;
     }
 }
