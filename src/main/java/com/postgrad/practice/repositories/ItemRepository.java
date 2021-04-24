@@ -2,8 +2,10 @@ package com.postgrad.practice.repositories;
 
 import com.postgrad.practice.models.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
-
+    @Query(value = "SELECT * FROM items ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    public Item findRandomItem();
 }
