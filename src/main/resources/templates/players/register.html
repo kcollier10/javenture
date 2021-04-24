@@ -1,0 +1,38 @@
+<!doctype html>
+<html id="register" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+<body>
+<div>
+    <h1>REGISTER</h1>
+
+    <form class="container p-1" th:action="@{/register}" method="post" th:object="${user}">
+        <div class="form-group">
+            <input class="form-control sign-up-input" type="text" id="username" th:field="*{username}" placeholder="Username" />
+            <p class="error-msg" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <p class="error-msg" th:if="${username != null}" th:text="'Username already exists'"></p>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control sign-up-input" type="password" id="password" name="password" th:field="*{password}" placeholder="Password" />
+            <p class="error-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control sign-up-input" id="confirm" name="confirm" type="password" placeholder="Confirm Password" />
+            <input class="form-control sign-up-input" name="id" type="hidden" th:value="${user.getId()}">
+        </div>
+
+        <input class="btn btn-block sign-up-btn" type="submit" value="Sign Up" />
+    </form>
+</div>
+</div>
+
+
+</div>
+</body>
+
+
+</html>
